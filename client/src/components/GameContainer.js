@@ -1,7 +1,7 @@
 import React from 'react';
-import WorkersModule from './WorkersModule';
-import FactoryFloor from './FactoryFloor';
-import ResourceBar from './ResourceBar';
+import WorkersModule from './game-container/WorkersModule';
+import FactoryFloor from './game-container/FactoryFloor';
+import ResourceBar from './game-container/ResourceBar';
 
 const GameContainer = () => {
 	return (
