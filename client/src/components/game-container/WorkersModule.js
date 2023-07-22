@@ -1,6 +1,6 @@
 import React from 'react';
 
-const WorkersModule = () => {
+const WorkersModule = (props) => {
 	return (
 		<div
 			style={{

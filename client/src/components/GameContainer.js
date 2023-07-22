@@ -3,7 +3,7 @@ import WorkersModule from './game-container/WorkersModule';
 import FactoryFloor from './game-container/FactoryFloor';
 import ResourceBar from './game-container/ResourceBar';
 
-const GameContainer = () => {
+const GameContainer = (props) => {
 	return (
 		<div
 			style={{
