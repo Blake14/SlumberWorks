@@ -18,8 +18,14 @@ const GameContainer = (props) => {
 					justifyContent: 'space-evenly',
 				}}
 			>
-				<WorkersModule playerData={props.playerData} />
-				<FactoryFloor />
+				<WorkersModule
+					playerData={props.playerData}
+					headerColor={props.headerColor}
+				/>
+				<FactoryFloor
+					playerData={props.playerData}
+					headerColor={props.headerColor}
+				/>
 			</div>
 		</div>
 	);
