@@ -63,6 +63,19 @@ const WorkerNamePlate = (props) => {
 					</p>
 				</div>
 			</div>
+			<ButtonGroup style={{ height: 25, margin: 10 }}>
+				<Button variant='outline-danger' size='sm' style={{ fontSize: 10 }}>
+					Fire
+				</Button>
+				<Button
+					variant='outline-secondary'
+					size='sm'
+					style={{ fontSize: 10 }}
+					disabled
+				>
+					Assign
+				</Button>
+			</ButtonGroup>
 		</div>
 	);
 };
