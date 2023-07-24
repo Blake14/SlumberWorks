@@ -6,8 +6,10 @@ import GameContainer from './components/GameContainer';
 
 const App = () => {
 	const [bgColor, setBgColor] = useState('#33a1fd');
+	const [headerColor, setHeaderColor] = useState('#4a4e69');
 	document.body.style.backgroundColor = bgColor;
 	document.body.style.color = 'white';
+	const [gameLog, setGameLog] = useState([]);
 	const [playerData, setPlayerData] = useState({
 		currDay: 1,
 		dreamEssence: 1000,
@@ -40,6 +42,7 @@ const App = () => {
 			},
 		],
 	});
+
 	return (
 		<Router>
 			<Routes>
@@ -48,7 +51,13 @@ const App = () => {
 					<Route
 						path='/lineup'
 						element={
-							<GameContainer bgColor={bgColor} playerData={playerData} />
+							<GameContainer
+								bgColor={bgColor}
+								playerData={playerData}
+								gameLog={gameLog}
+								setGameLog={setGameLog}
+								headerColor={headerColor}
+							/>
 						}
 					/>
 				</Route>
