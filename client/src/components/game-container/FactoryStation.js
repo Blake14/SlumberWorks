@@ -8,8 +8,38 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
 const FactoryStation = (props) => {
+	const [disabledUpgrade, setDisabledUpgrade] = useState(false);
 	const [selectedWorker, setSelectedWorker] = useState(null);
 
+	const upgradeCost = props.UpgradeData.find(
+		(x) => x.level === props.station.level + 1
+	)?.cost;
+
+	useEffect(() => {
+		setDisabledUpgrade(
+			!upgradeCost || props.station.level === props.UpgradeData.length
+		);
+		setSelectedWorker(props.station.assignedTo); // Set the selectedWorker initially based on the assignedTo value
+	}, [
+		upgradeCost,
+		props.station.level,
+		props.UpgradeData,
+		props.station.assignedTo,
+	]);
+
+	const handleUpgradeClick = () => {
+		if (props.playerData.dreamEssence >= upgradeCost) {
+			props.setPlayerData((prevState) => ({
+				...prevState,
+				dreamEssence: prevState.dreamEssence - upgradeCost,
+				stations: prevState.stations.map((station) =>
+					station.stationId === props.station.stationId
+						? { ...station, level: station.level + 1 }
+						: station
+				),
+			}));
+		}
+	};
 	const buttonStyle = {
 		width: 100,
 		height: 100,
@@ -92,6 +122,10 @@ const FactoryStation = (props) => {
 				}}
 			>
 				<input
+					onChange={(e) => handleStationLevelChange(e, props.station.stationId)}
+					value={
+						props.station.alias || `Dream Station ${props.station.stationId}`
+					}
 					style={{
 						border: 'none',
 						backgroundColor: '#4a4e69',
@@ -196,7 +230,10 @@ const FactoryStation = (props) => {
 								variant='secondary'
 							>
 								{props.playerData.workers.map((worker, index) => (
-									<Dropdown.Item key={index}>
+									<Dropdown.Item
+										key={index}
+										onClick={() => handleWorkerSelect(worker)} // Use onClick event instead of onSelect
+									>
 										{worker.firstName} {worker.lastName}
 									</Dropdown.Item>
 								))}
@@ -233,9 +270,15 @@ const FactoryStation = (props) => {
 						justifyContent: 'right',
 					}}
 				>
-					<Button style={buttonStyle}>
+					<Button
+						style={buttonStyle}
+						disabled={disabledUpgrade}
+						onClick={handleUpgradeClick}
+					>
 						<div>
-							{`Upgrade to Level ${props.station.level + 1}`}
+							{upgradeCost > 0
+								? `Upgrade to Level ${props.station.level + 1}`
+								: 'Max Level'}
 							<div
 								style={{
 									display: 'flex',
@@ -255,7 +298,13 @@ const FactoryStation = (props) => {
 									}}
 								>
 									<p>
-										<strong></strong>
+										<strong>
+											{props.UpgradeData.filter((x, i) => {
+												return x.level === props.station.level + 1;
+											}).map((x, i) => {
+												return x.cost;
+											})}
+										</strong>
 									</p>
 								</div>
 								<div
@@ -269,7 +318,7 @@ const FactoryStation = (props) => {
 											width: 23,
 											marginTop: 6,
 										}}
-										src={DreamEssenceToken}
+										src={upgradeCost > 0 ? DreamEssenceToken : ''}
 									></Image>
 								</div>
 							</div>
