@@ -1,6 +1,9 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button';
+import WorkerNamePlate from './WorkerNamePlate';
 
 const WorkersModule = (props) => {
+	//console.log(props.playerData.workers);
 	return (
 		<div
 			style={{
@@ -27,6 +30,47 @@ const WorkersModule = (props) => {
 				}}
 			>
 				Dream Workers
+			</div>
+			<div
+				style={{
+					width: '100%',
+					height: 50,
+				}}
+			>
+				<Button
+					variant='info'
+					style={{
+						margin: 10,
+					}}
+					onClick={props.handleGenerateWorker}
+				>
+					Hire Random
+				</Button>
+			</div>
+			<div
+				style={{
+					overflow: 'scroll',
+					height: 715,
+					borderRadius: 25,
+				}}
+			>
+				{props.playerData.workers
+					.filter((wkr, idx) => {
+						return wkr !== undefined;
+					})
+					.map((wkr, idx) => {
+						console.log(wkr);
+						return (
+							<WorkerNamePlate
+								key={idx}
+								firstName={wkr.firstName}
+								lastName={wkr.lastName}
+								specialty={wkr.dreamSpecialty}
+								age={wkr.age}
+								bgColor={props.bgColor}
+							/>
+						);
+					})}
 			</div>
 		</div>
 	);
