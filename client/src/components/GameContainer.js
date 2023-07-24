@@ -10,7 +10,7 @@ const GameContainer = (props) => {
 				height: 800,
 			}}
 		>
-			<ResourceBar />
+			<ResourceBar playerData={props.playerData} />
 			<div
 				style={{
 					display: 'flex',
