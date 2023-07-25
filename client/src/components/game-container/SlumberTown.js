@@ -9,7 +9,7 @@ const SlumberTown = (props) => {
 			alias: 'Slot1',
 			posX: 0,
 			posY: 5,
-			building: 'None',
+			building: 'SlumberMill',
 			active: true,
 			height: 60,
 			width: 140,
