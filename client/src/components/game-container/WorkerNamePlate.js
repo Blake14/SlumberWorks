@@ -12,7 +12,7 @@ const WorkerNamePlate = (props) => {
 		<div
 			style={{
 				height: 85,
-				border: '1px solid black',
+				border: '2px solid black',
 				padding: 10,
 				margin: 10,
 				borderRadius: 15,
